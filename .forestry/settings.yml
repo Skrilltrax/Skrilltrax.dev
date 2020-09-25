@@ -9,6 +9,8 @@ sections:
   label: fixed
   create: all
   match: "**/*"
+  templates:
+  - blog-post
 - type: directory
   path: content/blog
   label: Blog

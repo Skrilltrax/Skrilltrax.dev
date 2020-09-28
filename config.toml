@@ -20,23 +20,23 @@ blog  = "blog/:slug/"
 name                   = "Blog"
 weight                 = -120
 identifier             = "blog"
-url                    = "blog/"
+url                    = "/blog/"
 
 [[menu.main]]
 name                   = "About"
 weight                 = -110
 identifier             = "about"
-url                    = "about/"
+url                    = "/about/"
 
 [[menu.main]]
 name                   = "Code"
 weight                 = -100
 identifier             = "code"
-url                    = "code/"
+url                    = "/code/"
 
 [params]
 include_rss            = true                          # include RSS <link> tag in <head> and show RSS icon
-latestpostscount       = 1                             # how many posts to display on the home page
+latestpostscount       = 5                             # how many posts to display on the home page
 showlatestpostsheader  = false			       # show latest posts header or not 
 i18n_flags             = false                         # whether to display small country flags for available translations
 author                 = "Aditya Wasan"
@@ -53,7 +53,7 @@ instagram              = "//instagram.com/skrilltrax"
 lang                   = "en"
 linkedin               = "//linkedin.com/in/skrilltrax"
 noshowreadtime         = false                         # if true, don't show "<x> minutes read" in posts
-selfintro              = "Hi, I'm an android developer and I love kotlin."
+# selfintro              = "Hi, I'm an android developer and I love kotlin."
 twitter                = "//twitter.com/skrilltrax"
 # mastodon               = "//example.com/@you"
 telegram               = "//t.me/skrilltrax"

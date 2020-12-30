@@ -32,5 +32,14 @@ fields:
 - name: toc
   type: boolean
   label: TOC
+- name: content
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: true
+    schema:
+      format: markdown
+  label: Content
 pages:
 - content/blog/using-polymorphic-json-adapter-on-android.md

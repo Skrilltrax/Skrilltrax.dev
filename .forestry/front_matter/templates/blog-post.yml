@@ -18,5 +18,19 @@ fields:
   config:
     required: false
   label: description
+- name: keywords
+  type: tag_list
+  default: []
+  label: Keywords
+- name: tags
+  type: tag_list
+  default: []
+  label: Tags
+- name: math
+  type: boolean
+  label: Math
+- name: toc
+  type: boolean
+  label: TOC
 pages:
 - content/blog/using-polymorphic-json-adapter-on-android.md

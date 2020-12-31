@@ -43,7 +43,7 @@ class Person(
 
 There are a lot more things that you can do with Moshi and we're not gonna go into that but this how we generate an adapter with the code generation method.
 
-<sub>* You'll have to enable `kapt` and add `kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")` to your build.gradle so that Moshi can generate code for you</sub>
+<sub>* You'll have to enable `kapt` and add the [moshi-kotlin-codegen](https://github.com/square/moshi#codegen) dependency so that Moshi can generate an adapter for this class for you</sub>
 
 ### Moshi adapter using reflection
 
@@ -51,19 +51,17 @@ In the case of reflection, there's really nothing to do except adding a `KotlinJ
 
     var moshi = Moshi.Builder()
         // KotlinJsonAdapterFactoy() should be always added in the end 
-        // so that moshi can use other adapters first.
+        // so that moshi can try other adapters first.
         .add(KotlinJsonAdapterFactory())
         .build()
 
 ## Polymorphic Adapters
 
-So you might be wondering what this Polymorphic Adapter is? and why do even need it if Moshi can already generate adapters for us?
+So, if Moshi can generate adapters for you both at build time and at runtime, why do you need a polymorphic adapter? And what even is it?
 
-Yes, but, Moshi can only generate adapters when proper types are known. In the case of an abstract class, it is difficult for Moshi to know which derived class it should create and that's when `PolymorphicJsonAdapterFactory` comes in
+Good questions! The problem we're trying solve is that Moshi can only generate adapters when exact types are known. In the case of an abstract class, it is impossible for Moshi to know which implementation of the abstract class it should create and that's when polymorphic adapters come in.
 
-Let's go through an example to understand it properly.
-
-Suppose we have a base class called `Person` like this
+Learning by seeing is best, so let's start dabbling in code. Suppose we have a base class called `Person` like this:
 
 ```kotlin
 abstract class Person {
@@ -73,7 +71,7 @@ abstract class Person {
 }
 ```
 
-and we have two derived classes `Doctor` and `Engineer`
+and two subclasses of `Person`, `Doctor` and `Engineer`:
 
 ```kotlin
 class Doctor(
@@ -93,27 +91,28 @@ class Engineer(
 }
 ```
 
-Now, if the app receives a request where the `occupation` is Doctor or Engineer, we expect Moshi to create an instance of `Doctor` or `Engineer` class. However, Moshi does not know which property it has to use to determine the type of the derived class. Let's solve this.
+Now, if you try to parse a JSON body where the `occupation` is Doctor or Engineer, we want Moshi to create an instance of `Doctor` or `Engineer` class respectively. However, Moshi cannot automatically determine this. Let's help it along.
 
-### Here's how you can do it
+### Creating a polymorphic adapter
 
-1. First, you'll have to add the `moshi-adapters` dependency.
+1. First, add the `moshi-adapters` dependency.
 
    ```kotlin
-   implementation("com.squareup.moshi:moshi-adapters:1.11.0")
+   implementation("com.squareup.moshi:moshi-adapters:<latest version>")
    ```
+
 2. Now create an adapter for your abstract class (`Person` class in this example)
 
    ```kotlin
    val adapterFactory = PolymorphicJsonAdapterFactory
-   						.of(Person::class.java, "occupation")
-   						.withSubtype(Doctor::class.java, "Doctor")
-   						.withSubtype(Engineer::class.java, "Engineer")
+        .of(Person::class.java, "occupation")
+        .withSubtype(Doctor::class.java, "Doctor")
+        .withSubtype(Engineer::class.java, "Engineer")
    ```
 
-   Here's the main part of our Polymorphic adapter. We create an instance of `PolymorphicJsonAdapterFactory` of type `Person` and then we specify which key Moshi should use to determine the derived class it should generate (`occupation` is used here).
+   Here's the main part of our polymorphic adapter. We create an instance of `PolymorphicJsonAdapterFactory` for the type `Person`, and then we specify which key Moshi should use to determine the class it should instantiate. In our case, that's `occupation`.
 
-   After that, we've added all the classes that extend the Person class and specified the values on which those classes should be built. e.g. In this case a JSON like 
+   After that, we add all the subclasses of `Person` and specify the values of `occupation` on which those classes should be selected. In this case, a JSON body like this:
 
    ```json
    {
@@ -123,15 +122,16 @@ Now, if the app receives a request where the `occupation` is Doctor or Engineer,
    }
    ```
 
-   will generate an instance of `Doctor` class and similarly if the occupation was Engineer it would have generated an instance of `Engineer` class.
-3.   Now, the last task is just adding your PolymorphicJsonAdapterFactory to the Moshi builder and then using that Moshi instance wherever we want (e.g. Retrofit)
+   will generate an instance of the `Doctor` class.
+
+3.   The final step is to add this adapter to the builder of your `Moshi` instance.
 
    ```kotlin
    val moshi = Moshi.Builder()
-   				.add(adapterFactory)
-   				.build()
+   	    .add(adapterFactory)
+   	    .build()
    ```
 
 ## Ending notes
 
-Moshi is a powerful and fast JSON library that can perform some really cool stuff. It is built and maintained by some of the best developers so try it and have fun playing around with it :smiley:
+Moshi is a powerful and fast JSON library that can perform some really cool stuff. It is built and maintained by some of the smartest developers in the Android space so try it out and have fun playing around with it :smiley:

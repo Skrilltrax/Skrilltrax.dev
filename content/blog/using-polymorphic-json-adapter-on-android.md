@@ -7,13 +7,13 @@ keywords = []
 math = false
 slug = "using-polymorphic-adapter-moshi"
 tags = ["Moshi", "Polymorphic", "JSON", "Kotlin"]
-title = "Using Polymorphic json adapter with Moshi"
+title = "Using polymorphic json adapter with Moshi"
 toc = true
 
 +++
-Hey, today we're gonna learn how to use the Polymorphic Json adapter with Moshi. Let's start with some basics around Moshi and its adapters.
+Hey, today we're gonna learn how to use the polymorphic json adapter with Moshi. Let's start with some basics around Moshi and its adapters.
 
-Here's the [code](#heres-how-you-can-do-it) if you don't have time to read everything.
+Here's the [code](#creating-a-polymorphic-adapter) if you don't have time to read everything.
 
 ## What is Moshi?
 
@@ -100,8 +100,8 @@ Now, if you try to parse a JSON body where the `occupation` is Doctor or Enginee
    ```kotlin
    implementation("com.squareup.moshi:moshi-adapters:<latest version>")
    ```
-
-2. Now create an adapter for your abstract class (`Person` class in this example)
+2. Create adapters for your subclasses (`Doctor` and `Engineer`) by either one of the methods mentioned [above 👆](#what-are-adapters).
+3. Now create an adapter for your abstract class (`Person` class in this example)
 
    ```kotlin
    val adapterFactory = PolymorphicJsonAdapterFactory
@@ -123,8 +123,7 @@ Now, if you try to parse a JSON body where the `occupation` is Doctor or Enginee
    ```
 
    will generate an instance of the `Doctor` class.
-
-3.   The final step is to add this adapter to the builder of your `Moshi` instance.
+4. The final step is to add this adapter to the builder of your `Moshi` instance.
 
    ```kotlin
    val moshi = Moshi.Builder()

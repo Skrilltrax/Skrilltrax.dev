@@ -1,6 +1,6 @@
 +++
 content = ""
-date = 2020-12-29T18:30:00Z
+date = 2001-01-01T05:30:00Z
 description = "Learn how to use polymorphic adapter with an abstract class"
 keywords = []
 math = false

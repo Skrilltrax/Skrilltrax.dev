@@ -2,7 +2,7 @@
 theme = "hugo-theme-codex" 
 
 # Override these settings with your own
-title = "codex"
+title = "Skrilltrax"
 languageCode = "en-us"
 baseURL = "https://skrilltrax.dev/"
 copyright = "© {year}"
@@ -13,7 +13,7 @@ enableGitInfo = true
 # disqusShortname = ""
 
 # Add your Google Analytics identifier: UA-XXXXXXXX-X
-# googleAnalytics = "" 
+googleAnalytics = "UA-65288378-3" 
 
 # Optional params
 [params]
@@ -41,7 +41,7 @@ enableGitInfo = true
   # twitterAuthor = "@<your handle>"
 
   # Set to true to display page title in table of contents in blog posts.
-  showPageTitleInTOC = false
+  showPageTitleInTOC = true
 
 # This disables Hugo's default syntax highlighting in favor
 # of prismjs. If you wish to use Hugo's default syntax highlighting

@@ -60,6 +60,8 @@
   {{ $script := resources.Get "js/index.js" | minify | fingerprint }}
   <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity | safeHTMLAttr }}" crossorigin="anonymous"></script>
   {{ block "scripts" . }} {{ end }}
+  
+  {{ partial "simple_analytics.html" . }}
 </body>
 
 </html>

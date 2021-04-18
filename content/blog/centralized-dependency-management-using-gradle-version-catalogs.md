@@ -43,51 +43,59 @@ Currently, there are multiple ways to declare and use dependencies inside our Gr
 There are a few steps that we have to perform to use the version catalog.
 
 1. First, make sure you are using Gradle 7.0. If you're not, you can update your project's Gradle version using the following command.
+   ```shell
+   ./gradlew wrapper --gradle-version=7.0
+   ```
 
-       ./gradlew wrapper --gradle-version=7.0
 2. Enable the feature by adding the following in your `settings.gradle(.kts)`.  
-
-       enableFeaturePreview("VERSION_CATALOGS")
-
+   ```kotlin
+   enableFeaturePreview("VERSION_CATALOGS")
+   ```
    This is necessary to do because the version catalog is an experimental feature.
+
 3. Now, we are all set to define our dependencies. To do that, create `libs.versions.toml` inside the root level Gradle directory.
 
-       # gradle/libs.versions.toml
-       
-       [versions]
-       compose = "1.0.0-beta04"
-       coroutines = "1.4.3"
-       lifecycle = "2.4.0-alpha01"
-       
-       [libraries]
-       # Kotlin dependencies
-       kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
-       kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
-       kotlin-coroutines-jvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jvm", version.ref = "coroutines" }
-       
-       # AndroidX dependencies
-       androidx-appcompat = "androidx.appcompat:appcompat:1.3.0-rc01"
-       androidx-browser = "androidx.browser:browser:1.3.0"
-       androidx-coreLibraryDesugaring = "com.android.tools:desugar_jdk_libs:1.0.10"
-       androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0-alpha08"
-       androidx-lifecycle-runtimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
-       androidx-lifecycle-viewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
-       
-       [bundles]
-       androidxLifecycle = ["androidx-lifecycle-runtimeKtx", "androidx-lifecycle-viewmodelKtx"]
-4. Now that everything is in place we can finally start using the version catalogs in the dependencies block inside `build.gradle(.kts)`. Just open any of your subprojects (e.g, app) and try replacing the dependencies.
+   ```toml
+   # gradle/libs.versions.toml
+   
+   [versions]
+   compose = "1.0.0-beta04"
+   coroutines = "1.4.3"
+   lifecycle = "2.4.0-alpha01"
+   
+   [libraries]
+   # Kotlin dependencies
+   kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+   kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+   kotlin-coroutines-jvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jvm", version.ref = "coroutines" }
+   
+   # AndroidX dependencies
+   androidx-appcompat = "androidx.appcompat:appcompat:1.3.0-rc01"
+   androidx-browser = "androidx.browser:browser:1.3.0"
+   androidx-coreLibraryDesugaring = "com.android.tools:desugar_jdk_libs:1.0.10"
+   androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0-alpha08"
+   androidx-lifecycle-runtimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+   androidx-lifecycle-viewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+   
+   [bundles]
+   androidxLifecycle = ["androidx-lifecycle-runtimeKtx", "androidx-lifecycle-viewmodelKtx"]
+   ```
 
-       composeOptions {
-         # versions
-         kotlinCompilerExtensionVersion libs.versions.compose.get()
-       }
+4. Now that everything is in place we can finally start using the version catalogs in the dependencies block inside `build.gradle(.kts)`. Just open any of your subprojects (e.g, app) and try replacing the dependencies.
+   
+   ```kotlin
+   composeOptions {
+     # versions
+     kotlinCompilerExtensionVersion libs.versions.compose.get()
+   }
        
-       dependencies {
-         implementation(libs.kotlin.coroutines.android)
+   dependencies {
+     implementation(libs.kotlin.coroutines.android)
          
-         # bundles
-         implementation(libs.bundles.androidxLifecycle)
-       }
+     # bundles
+     implementation(libs.bundles.androidxLifecycle)
+   }
+   ```
 
 ## Conclusion
 

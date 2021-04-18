@@ -12,7 +12,7 @@ toc = true
 +++
 The Gradle team recently released Gradle 7.0 and it comes with a bunch of exciting new features like [native support for M1 macs](https://docs.gradle.org/7.0/release-notes.html#apple-silicon), [type-safe project accessors](), and [support for running and building Java 16](https://docs.gradle.org/7.0/release-notes.html#support-for-java-16). However, today we're gonna focus on one specific feature, Gradle version catalogs.
 
-<sub>* Version catalogs is currently an experimental feature so the API may change in future. </sub> 
+<sub>* Version catalogs is currently an experimental feature so the API may change in the future. </sub> 
 
 ## What is a version catalog?
 

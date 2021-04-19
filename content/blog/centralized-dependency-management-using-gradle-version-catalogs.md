@@ -36,7 +36,7 @@ Currently, there are multiple ways to declare and use dependencies inside our Gr
 
 * Version catalog helps arrange dependencies inside a single file. Dependencies can be used with multi-project builds and even between completely different projects.
 * Unlike `buildSrc` changing a dependency inside  the `lib.versions.toml` won't invalidate the complete `buildSrc` cache.
-* Being a standard way to manage dependencies, popular tools like [Dependabot](https://github.com/dependabot) can be updated to work with it once the feature is stable. 
+* TOML is a reasonably popular and language-agnostic format, so popular tools like [Dependabot](https://github.com/dependabot) can be updated to work with version catalogs once the feature is stable. 
 
 ## How to use the Gradle version catalog?
 
@@ -51,9 +51,9 @@ There are a few steps that we have to perform to use the version catalog.
    ```kotlin
    enableFeaturePreview("VERSION_CATALOGS")
    ```
-   This is necessary to do because the version catalog is an experimental feature.
+   This is necessary to do because the version catalog is an experimental feature on Gradle 7.0.
 
-3. Now, we are all set to define our dependencies. To do that, create `libs.versions.toml` inside the root level Gradle directory.
+3. Now, we are all set to define our dependencies. To do that, create a file named `libs.versions.toml` inside the `gradle/` directory.
 
    ```toml
    # gradle/libs.versions.toml
@@ -81,15 +81,16 @@ There are a few steps that we have to perform to use the version catalog.
    androidxLifecycle = ["androidx-lifecycle-runtimeKtx", "androidx-lifecycle-viewmodelKtx"]
    ```
 
-4. Now that everything is in place we can finally start using the version catalogs in the dependencies block inside `build.gradle(.kts)`. Just open any of your subprojects (e.g, app) and try replacing the dependencies.
+This will generate an extension in your Gradle build with the name `libs`, which can then be used in your Gradle scripts to access dependencies. Here's a few examples 👇
    
    ```kotlin
    composeOptions {
      # versions
-     kotlinCompilerExtensionVersion libs.versions.compose.get()
+     kotlinCompilerExtensionVersion libs.versions.compose.get() // The get() is required because the API returns a Provider<String>
    }
        
    dependencies {
+     # libraries
      implementation(libs.kotlin.coroutines.android)
          
      # bundles
@@ -101,4 +102,4 @@ There are a few steps that we have to perform to use the version catalog.
 
 Version catalog helps in centralizing common definitions and allows sharing of dependencies and plugins. There are numerous benefits of having a standard way to manage dependencies and hopefully, it will give developers some new, powerful set of tools to work with. Go ahead, give it a try and let me know how you feel about it. 
 
-Happy Coding!!
+Happy Coding!

@@ -1,7 +1,6 @@
 +++
 date = 2021-04-17T18:30:00Z
 description = "A version catalog is a list of dependencies that the user can pick and use inside their Gradle build scripts to declare dependencies. It allows the users to manage and share their dependencies from a centralized location."
-draft = true
 keywords = ["Version Catalogs", "Gradle", "Dependency Management"]
 math = false
 slug = "centralized-dependency-management-gradle-version-catalogs"

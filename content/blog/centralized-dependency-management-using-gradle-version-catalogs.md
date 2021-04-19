@@ -1,6 +1,6 @@
 +++
 date = 2021-04-17T18:30:00Z
-description = ""
+description = "A version catalog is a list of dependencies that the user can pick and use inside their Gradle build scripts to declare dependencies. It allows the users to manage and share their dependencies from a centralized location."
 draft = true
 keywords = ["Version Catalogs", "Gradle", "Dependency Management"]
 math = false
@@ -12,11 +12,11 @@ toc = true
 +++
 The Gradle team recently released Gradle 7.0 and it comes with a bunch of exciting new features like [native support for M1 macs](https://docs.gradle.org/7.0/release-notes.html#apple-silicon), [type-safe project accessors](), and [support for running and building Java 16](https://docs.gradle.org/7.0/release-notes.html#support-for-java-16). However, today we're gonna focus on one specific feature, Gradle version catalogs.
 
-<sub>* Version catalogs is currently an experimental feature so the API may change in the future. </sub> 
+<sub>* Version catalogs is currently an experimental feature so the API may change in the future. </sub>
 
 ## What is a version catalog?
 
-A version catalog is a list of dependencies that the user can pick and use inside their Gradle build scripts to declare dependencies. It allows the users to manage and share their dependencies from a centralized location. 
+A version catalog is a list of dependencies that the user can pick and use inside their Gradle build scripts to declare dependencies. It allows the users to manage and share their dependencies from a centralized location.
 
 The version catalog can be specified using a [TOML](https://toml.io/) file.
 
@@ -36,23 +36,24 @@ Currently, there are multiple ways to declare and use dependencies inside our Gr
 
 * Version catalog helps arrange dependencies inside a single file. Dependencies can be used with multi-project builds and even between completely different projects.
 * Unlike `buildSrc` changing a dependency inside  the `lib.versions.toml` won't invalidate the complete `buildSrc` cache.
-* TOML is a reasonably popular and language-agnostic format, so popular tools like [Dependabot](https://github.com/dependabot) can be updated to work with version catalogs once the feature is stable. 
+* TOML is a reasonably popular and language-agnostic format, so popular tools like [Dependabot](https://github.com/dependabot) can be updated to work with version catalogs once the feature is stable.
 
 ## How to use the Gradle version catalog?
 
 There are a few steps that we have to perform to use the version catalog.
 
 1. First, make sure you are using Gradle 7.0. If you're not, you can update your project's Gradle version using the following command.
+
    ```shell
    ./gradlew wrapper --gradle-version=7.0
    ```
+2. Enable the feature by adding the following in your `settings.gradle(.kts)`.
 
-2. Enable the feature by adding the following in your `settings.gradle(.kts)`.  
    ```kotlin
    enableFeaturePreview("VERSION_CATALOGS")
    ```
-   This is necessary to do because the version catalog is an experimental feature on Gradle 7.0.
 
+   This is necessary to do because the version catalog is an experimental feature on Gradle 7.0.
 3. Now, we are all set to define our dependencies. To do that, create a file named `libs.versions.toml` inside the `gradle/` directory.
 
    ```toml
@@ -81,25 +82,25 @@ There are a few steps that we have to perform to use the version catalog.
    androidxLifecycle = ["androidx-lifecycle-runtimeKtx", "androidx-lifecycle-viewmodelKtx"]
    ```
 
-This will generate an extension in your Gradle build with the name `libs`, which can then be used in your Gradle scripts to access dependencies. Here's a few examples 👇
-   
-   ```kotlin
-   composeOptions {
-     # versions
-     kotlinCompilerExtensionVersion libs.versions.compose.get() // The get() is required because the API returns a Provider<String>
-   }
-       
-   dependencies {
-     # libraries
-     implementation(libs.kotlin.coroutines.android)
-         
-     # bundles
-     implementation(libs.bundles.androidxLifecycle)
-   }
-   ```
+This will generate an extension in your Gradle build with the name `libs`, which can then be used in your Gradle scripts to access dependencies. Here are a few examples 👇
+
+```kotlin
+composeOptions {
+  # versions
+  kotlinCompilerExtensionVersion libs.versions.compose.get() // The get() is required because the API returns a Provider<String>
+}
+    
+dependencies {
+  # libraries
+  implementation(libs.kotlin.coroutines.android)
+      
+  # bundles
+  implementation(libs.bundles.androidxLifecycle)
+}
+```
 
 ## Conclusion
 
-Version catalog helps in centralizing common definitions and allows sharing of dependencies and plugins. There are numerous benefits of having a standard way to manage dependencies and hopefully, it will give developers some new, powerful set of tools to work with. Go ahead, give it a try and let me know how you feel about it. 
+Version catalog helps in centralizing common definitions and allows sharing of dependencies and plugins. There are numerous benefits of having a standard way to manage dependencies and hopefully, it will give developers some new, powerful set of tools to work with. Go ahead, give it a try and let me know how you feel about it.
 
 Happy Coding!

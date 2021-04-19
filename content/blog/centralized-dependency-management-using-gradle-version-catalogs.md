@@ -98,6 +98,18 @@ dependencies {
 }
 ```
 
+### Stuck somewhere?
+
+Here's a bunch of PR's that you can look at if you need any help in migrating to version catalogs.
+
+[**Android Password Store**](https://github.com/android-password-store/Android-Password-Store/pull/1381/files)
+
+[**Accompanist**](https://github.com/google/accompanist/pull/345)
+
+[**Claw**](https://github.com/msfjarvis/compose-lobsters/pull/217)
+
+If you still need help with something, feel free to reach out on any of the platforms below.
+
 ## Conclusion
 
 Version catalog helps in centralizing common definitions and allows sharing of dependencies and plugins. There are numerous benefits of having a standard way to manage dependencies and hopefully, it will give developers some new, powerful set of tools to work with. Go ahead, give it a try and let me know how you feel about it.

@@ -1,11 +1,11 @@
 +++
 date = ""
-description = ""
+description = "Layout Validation is a tool using which you can validate your layouts while you're building them. While you can already see your current UI on several devices using the Android Studio's visual layout editor, Layout Validation allows you to check all those presets simultaneously and with some pretty sick features. "
 draft = true
-keywords = ["Android", "Android Studio"]
+keywords = ["Android", "Android Studio", "Layout Validation"]
 math = false
 slug = "validate-layout-android-studio"
-tags = ["Android", "Android Studio"]
+tags = ["android", "android-studio"]
 title = "Validating your layouts ft. Android Studio"
 toc = false
 

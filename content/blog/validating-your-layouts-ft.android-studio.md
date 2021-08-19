@@ -56,7 +56,7 @@ This was the most exciting and unique thing for me when I first learned about th
 
 In the end, we have the Font Sizes section, which can help us see how the UI will look when the user has changed the system font size. This can be quite helpful if your app targets an older demographic since they may increase the system font size for reading pleasure.
 
-<img src="/uploads/font_sizes.png">
+![](/uploads/font_sizes.png)
 
 ## Conclusion
 

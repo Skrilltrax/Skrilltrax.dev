@@ -34,5 +34,6 @@ fields:
   label: TOC
 pages:
 - content/blog/centralized-dependency-management-using-gradle-version-catalogs.md
+- content/blog/stop-sharing-your-sharedpreferences.md
 - content/blog/using-polymorphic-json-adapter-on-android.md
 - content/blog/validating-your-layouts-ft.android-studio.md

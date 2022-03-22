@@ -10,3 +10,4 @@ title = "Stop sharing your SharedPreferences"
 toc = true
 
 +++
+`SharedPreferences` is one of the most commonly used APIs in Android. It allows developers to save and retrieve key-value pairs inside their applications.

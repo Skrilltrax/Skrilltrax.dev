@@ -11,3 +11,9 @@ toc = true
 
 +++
 `SharedPreferences` is one of the most commonly used APIs in Android. It allows developers to save and retrieve key-value pairs inside their applications.
+
+WIP  
+  
+Harmony, MMKV, others + Context flags
+
+[https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:datastore/datastore-core/src/main/java/androidx/datastore/core/SingleProcessDataStore.kt](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:datastore/datastore-core/src/main/java/androidx/datastore/core/SingleProcessDataStore.kt "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:datastore/datastore-core/src/main/java/androidx/datastore/core/SingleProcessDataStore.kt")

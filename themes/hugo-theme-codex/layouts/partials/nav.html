@@ -2,9 +2,11 @@
   <ul class="nav__list">
     {{ $currentPage := . }}
     {{ range .Site.Menus.main }}
+    {{ $url := urls.Parse .URL }}
+    {{ $baseurl := urls.Parse $.Site.Params.Baseurl }}
       <li>
         <a {{ if or ($currentPage.IsMenuCurrent "main" .) (eq $currentPage.Section .Identifier) }} class="active"
-        {{end}} href="{{ .URL }}">{{ .Name }}</a>
+        {{end}} href="{{ .URL }}" {{ if ne $url.Host $baseurl.Host }}target="_blank"{{end}}>{{ .Name }}</a>
       </li>
     {{ end }}
   </ul>

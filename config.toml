@@ -67,3 +67,9 @@ googleAnalytics = "UA-65288378-3"
   name = "blog"
   title = "Blog"
   url = "/blog"
+
+[[menu.main]]
+  identifier = "resume"
+  name = "resume"
+  title = "Resume"
+  url = "https://drive.google.com/file/d/1WNXhgC_XxthT5_QHyBmoWOa5Szkfxaji/view?usp=sharing"

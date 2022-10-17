@@ -1,5 +1,5 @@
 ---
 heading: "Hey, I'm Aditya"
-subheading: "I'm an Android developer living in New York, USA. I love making beautiful and scalable native apps in Kotlin. Let's build something together 👋"
+subheading: "I am a master's at Stony Brook University. I love working on android applications and backend systems. Let's build something together 👋"
 handle: "skrilltrax"
 ---
